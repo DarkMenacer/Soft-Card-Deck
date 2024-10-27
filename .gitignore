@@ -30,3 +30,21 @@
 *.exe
 *.out
 *.app
+
+# folders
+build/
+.cache/
+
+# Editor config files
+.vscode
+.DS_Store
+
+# CMake files
+CMakeUserPresets.json
+
+# Temporary placeholders
+*.swp
+*test.*
+*test
+*input.*
+*output.*
