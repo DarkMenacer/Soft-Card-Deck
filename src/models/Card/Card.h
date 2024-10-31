@@ -7,14 +7,16 @@ namespace SoftCardDeck {
 		private:
 			SoftCardDeck::Rank __cardRank;
 			SoftCardDeck::Suit __cardSuit;
-			bool __cardFaceUp;
+			bool __cardFacedUp;
 			std::string __cardPath;
 		public:
 			void flip();
 			SoftCardDeck::Rank rank();
 			SoftCardDeck::Suit suit();
-			bool faceup();
+			bool facedup();
 			Card(Rank, Suit);
 			std::string path();
+			void set_face_up();
+			void set_face_down();
 	};
 }

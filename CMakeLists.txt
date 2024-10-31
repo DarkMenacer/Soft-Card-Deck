@@ -9,6 +9,7 @@ find_package(SFML REQUIRED)
 add_executable(${PROJECT_NAME} "src/main.cpp"
 	"src/constants/Card_Constants.cpp"
 	"src/models/Card/Card.cpp"
+	"src/models/Deck/Deck.cpp"
 )
 
 target_link_libraries(${PROJECT_NAME} sfml::sfml)
