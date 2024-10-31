@@ -6,6 +6,9 @@ include(${CMAKE_BINARY_DIR}/conan_toolchain.cmake)
 
 find_package(SFML REQUIRED)
 
-add_executable(${PROJECT_NAME} src/main.cpp)
+add_executable(${PROJECT_NAME} "src/main.cpp"
+	"src/constants/Card_Constants.cpp"
+	"src/models/Card/Card.cpp"
+)
 
 target_link_libraries(${PROJECT_NAME} sfml::sfml)
