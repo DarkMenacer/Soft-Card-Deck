@@ -5,7 +5,7 @@
 #include <memory>
 #include <random>
 
-SoftCardDeck::Deck::Deck(std::deque<Card> _cards) : __deckCards(_cards){
+SoftCardDeck::Deck::Deck(std::deque<Card> _cards) : __deckCards(_cards), __deckSize(_cards.size()){
 	this->__currentCard = this->__deckCards.begin();
 }
 
@@ -61,3 +61,5 @@ void SoftCardDeck::Deck::shuffle(){
 void SoftCardDeck::Deck::sort(){
 	//TODO: Need to come up with a clever way
 }
+
+int SoftCardDeck::Deck::size(){return this->__deckSize;}

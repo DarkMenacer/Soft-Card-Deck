@@ -8,6 +8,7 @@ namespace SoftCardDeck {
 		private:
 			std::deque<SoftCardDeck::Card> __deckCards;
 			std::deque<SoftCardDeck::Card>::iterator __currentCard;
+			int __deckSize;
 
 		public:
 			explicit Deck(std::deque<Card>);
@@ -21,6 +22,7 @@ namespace SoftCardDeck {
 			void face_down_deck();
 			void shuffle();
 			void sort();
+			int size();
 	};
 
 }
