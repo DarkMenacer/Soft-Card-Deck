@@ -26,3 +26,7 @@ void SoftCardDeck::Card::set_face_up(){this->__cardFacedUp = true;}
 void SoftCardDeck::Card::set_face_down(){this->__cardFacedUp = false;}
 
 SoftCardDeck::UUID SoftCardDeck::Card::uuid(){return this->__cardUUID;}
+
+bool SoftCardDeck::Card::operator==(const Card &card) const {
+	return card.__cardUUID == this->__cardUUID;
+}

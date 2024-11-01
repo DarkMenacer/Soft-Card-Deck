@@ -42,6 +42,9 @@ build/
 # CMake files
 CMakeUserPresets.json
 
+# Config files
+*.ini
+
 # Temporary placeholders
 *.swp
 *test.*

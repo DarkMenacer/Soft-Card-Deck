@@ -19,22 +19,34 @@ struct displayCard {
 };
 
 int main(){
-	std::deque<SoftCardDeck::Card> cardDeck;
+	std::deque<SoftCardDeck::Card> cardDeck, cardDeck2;
 	cardDeck.push_back(SoftCardDeck::Card(SoftCardDeck::Rank::JACK, SoftCardDeck::Suit::HEARTS));
 	cardDeck.push_back(SoftCardDeck::Card(SoftCardDeck::Rank::QUEEN, SoftCardDeck::Suit::HEARTS));
 	cardDeck.push_back(SoftCardDeck::Card(SoftCardDeck::Rank::KING, SoftCardDeck::Suit::HEARTS));
 	cardDeck.push_back(SoftCardDeck::Card(SoftCardDeck::Rank::ACE, SoftCardDeck::Suit::HEARTS));
 
-	SoftCardDeck::Deck myDeck(cardDeck);
+	cardDeck2.push_back(SoftCardDeck::Card(SoftCardDeck::Rank::JACK, SoftCardDeck::Suit::CLUBS));
+	cardDeck2.push_back(SoftCardDeck::Card(SoftCardDeck::Rank::QUEEN, SoftCardDeck::Suit::CLUBS));
+	cardDeck2.push_back(SoftCardDeck::Card(SoftCardDeck::Rank::KING, SoftCardDeck::Suit::CLUBS));
+	cardDeck2.push_back(SoftCardDeck::Card(SoftCardDeck::Rank::ACE, SoftCardDeck::Suit::CLUBS));
 
-	std::vector<displayCard> cardTextures;
-	for(int i = 0; i < myDeck.size(); ++i){
-		sf::Texture texture;
-		if(!texture.loadFromFile(myDeck.current_card().path())){
-			return -1;
+	std::vector<SoftCardDeck::Deck> myDeckVector;
+	myDeckVector.push_back(SoftCardDeck::Deck(cardDeck));
+	myDeckVector.push_back(SoftCardDeck::Deck(cardDeck2));
+	int currentDeck = 0;
+
+	std::vector<std::vector<displayCard> > cardTexturesVector;
+	for(int j = 0; j < myDeckVector.size(); ++j){
+		std::vector<displayCard> cardTextures;
+		for(int i = 0; i < myDeckVector[j].size(); ++i){
+			sf::Texture texture;
+			if(!texture.loadFromFile(myDeckVector[j].current_card().path())){
+				return -1;
+			}
+			cardTextures.push_back({texture, myDeckVector[j].current_card().uuid()});
+			myDeckVector[j].next_card();
 		}
-		cardTextures.push_back({texture, myDeck.current_card().uuid()});
-		myDeck.next_card();
+		cardTexturesVector.push_back(cardTextures);
 	}
 	sf::RenderWindow window(sf::VideoMode(1000, 1000), "Playing Cards");
 	while(window.isOpen()){
@@ -46,33 +58,45 @@ int main(){
 			}
 			if(event.type == sf::Event::KeyPressed){
 				if(event.key.code == sf::Keyboard::Right){
-					myDeck.next_card();
+					myDeckVector[currentDeck].next_card();
 				}
 				if(event.key.code == sf::Keyboard::Left){
-					myDeck.previous_card();
+					myDeckVector[currentDeck].previous_card();
 				}
-				// if(event.key.code == sf::Keyboard::Up){
-				// 	myDeck.flip_current_card();
-				// 	texture.loadFromFile(myDeck.current_card().path());
-				// 	sprite.setTexture(texture);
-				// }
-				// if(event.key.code == sf::Keyboard::Down){
-				// 	myDeck.shuffle();
-				// 	texture.loadFromFile(myDeck.current_card().path());
-				// 	sprite.setTexture(texture);
-				// }
+				if(event.key.code == sf::Keyboard::C){
+					currentDeck = !currentDeck;
+				}
+				if(event.key.code == sf::Keyboard::Enter){
+					myDeckVector[currentDeck].move_current_card_to(myDeckVector[!currentDeck]);
+					cardTexturesVector[currentDeck].clear();
+					std::vector<displayCard> cardTextures;
+					for(int j = 0; j < myDeckVector.size(); ++j){
+						std::vector<displayCard> cardTextures;
+						for(int i = 0; i < myDeckVector[j].size(); ++i){
+							sf::Texture texture;
+							if(!texture.loadFromFile(myDeckVector[j].current_card().path())){
+								return -1;
+							}
+							cardTextures.push_back({texture, myDeckVector[j].current_card().uuid()});
+							myDeckVector[j].next_card();
+						}
+						cardTexturesVector[j] = cardTextures;
+					}
+				}
 			}
 		}
 		window.clear(sf::Color(0, 125, 0));
-		for(int i = 0; i < myDeck.size(); ++i){
-			sf::Sprite sprite;
-			int selected = 0;
-			if(cardTextures[i].id == myDeck.current_card().uuid()){
-				selected = 50;
+		for(int j = 0; j < myDeckVector.size(); ++j){
+			for(int i = 0; i < myDeckVector[j].size(); ++i){
+				sf::Sprite sprite;
+				int selected = 0;
+				if(cardTexturesVector[j][i].id == myDeckVector[j].current_card().uuid()){
+					selected = 50;
+				}
+				sprite.setTexture(cardTexturesVector[j][i].texture);
+				sprite.setPosition(375+30*i+200-j*400, 275-selected);
+				window.draw(sprite);
 			}
-			sprite.setTexture(cardTextures[i].texture);
-			sprite.setPosition(375+30*i, 275-selected);
-			window.draw(sprite);
 		}
 		window.display();
 	}
