@@ -8,20 +8,18 @@ namespace SoftCardDeck {
 		private:
 			SoftCardDeck::Rank __cardRank;
 			SoftCardDeck::Suit __cardSuit;
-			bool __cardFaceUp;
+			bool __cardFacedUp;
 			std::string __cardPath;
 			SoftCardDeck::UUID __cardUUID;
 		public:
 			void flip();
 			SoftCardDeck::Rank rank();
 			SoftCardDeck::Suit suit();
-<<<<<<< Updated upstream
-			bool faceup();
-=======
 			SoftCardDeck::UUID uuid();
 			bool facedup();
->>>>>>> Stashed changes
 			Card(Rank, Suit);
 			std::string path();
+			void set_face_up();
+			void set_face_down();
 	};
 }

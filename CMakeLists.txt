@@ -9,11 +9,8 @@ find_package(SFML REQUIRED)
 add_executable(${PROJECT_NAME} "src/main.cpp"
 	"src/constants/Card_Constants.cpp"
 	"src/models/Card/Card.cpp"
-<<<<<<< Updated upstream
-=======
 	"src/models/Deck/Deck.cpp"
 	"src/utils/UUID/UUID.cpp"
->>>>>>> Stashed changes
 )
 
 target_link_libraries(${PROJECT_NAME} sfml::sfml)
