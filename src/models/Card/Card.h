@@ -21,5 +21,6 @@ namespace SoftCardDeck {
 			std::string path();
 			void set_face_up();
 			void set_face_down();
+			bool operator==(const Card &card) const;
 	};
 }
