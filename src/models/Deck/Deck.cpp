@@ -59,7 +59,7 @@ void SoftCardDeck::DeckModel::shuffle(){
 }
 
 void SoftCardDeck::DeckModel::sort(){
-	//TODO: Need to come up with a clever way
+	// TODO: Need to come up with a clever way
 }
 
 int SoftCardDeck::DeckModel::size(){return this->__deckSize;}
@@ -70,14 +70,14 @@ void SoftCardDeck::DeckModel::add_card(SoftCardDeck::CardModel card){
 }
 
 void SoftCardDeck::DeckModel::delete_current_card(){
-	if (!this->__deckSize){return;}
+	if(!this->__deckSize){return;}
 	this->__deckCards.erase(std::remove(this->__deckCards.begin(), this->__deckCards.end(), *this->__currentCard));
 	this->__currentCard = this->__deckCards.begin();
 	this->__deckSize = this->__deckCards.size();
 }
 
 void SoftCardDeck::DeckModel::move_current_card_to(SoftCardDeck::DeckModel &d){
-	if (!this->__deckSize){return;}
+	if(!this->__deckSize){return;}
 	d.add_card(this->current_card());
 	this->delete_current_card();
 }

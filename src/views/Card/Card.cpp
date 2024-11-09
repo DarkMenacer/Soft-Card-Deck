@@ -12,5 +12,4 @@ void SoftCardDeck::CardView::display_card(float xCoordinate, float yCoordinate, 
 	window->draw(sprite);
 }
 
-SoftCardDeck::UUID SoftCardDeck::CardView::id() {return this->__id;}
-
+SoftCardDeck::UUID SoftCardDeck::CardView::id(){return this->__id;}
