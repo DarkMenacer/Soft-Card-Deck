@@ -1,7 +1,7 @@
 #include "UUID.h"
 #include <cstdlib>
 
-//TODO: Move to boost::UUID implementation
+// TODO: Move to boost::UUID implementation
 
 SoftCardDeck::UUID::UUID(){this->__id = rand();}
 

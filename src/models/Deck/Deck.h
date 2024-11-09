@@ -4,19 +4,19 @@
 #include "../Card/Card.h"
 
 namespace SoftCardDeck {
-	class Deck {
+	class DeckModel {
 		private:
-			std::deque<SoftCardDeck::Card> __deckCards;
-			std::deque<SoftCardDeck::Card>::iterator __currentCard;
+			std::deque<SoftCardDeck::CardModel> __deckCards;
+			std::deque<SoftCardDeck::CardModel>::iterator __currentCard;
 			int __deckSize;
-			void add_card(SoftCardDeck::Card card);
+			void add_card(SoftCardDeck::CardModel card);
 			void delete_current_card();
 
 		public:
-			explicit Deck(std::deque<Card>);
-			SoftCardDeck::Card top_card();
-			SoftCardDeck::Card bottom_card();
-			SoftCardDeck::Card current_card();
+			explicit DeckModel(std::deque<CardModel>);
+			SoftCardDeck::CardModel top_card();
+			SoftCardDeck::CardModel bottom_card();
+			SoftCardDeck::CardModel current_card();
 			void next_card();
 			void previous_card();
 			void flip_current_card();
@@ -25,7 +25,7 @@ namespace SoftCardDeck {
 			void shuffle();
 			void sort();
 			int size();
-			void move_current_card_to(Deck &d);
+			void move_current_card_to(DeckModel &d);
 	};
 
 }

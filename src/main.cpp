@@ -1,52 +1,50 @@
 #include <SFML/Graphics.hpp>
 #include "./models/Card/Card.h"
 #include "./constants/Card_Constants.h"
+#include "models/Board/Board.h"
 #include "models/Deck/Deck.h"
 #include "utils/UUID/UUID.h"
+#include "views/Card/Card.h"
+#include "views/Deck/Deck.h"
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <algorithm>
 #include <deque>
 #include <iostream>
 #include <ostream>
 #include <string>
 #include <vector>
 
-struct displayCard {
-	sf::Texture texture;
-	SoftCardDeck::UUID id;
-};
-
 int main(){
-	std::deque<SoftCardDeck::Card> cardDeck, cardDeck2;
-	cardDeck.push_back(SoftCardDeck::Card(SoftCardDeck::Rank::JACK, SoftCardDeck::Suit::HEARTS));
-	cardDeck.push_back(SoftCardDeck::Card(SoftCardDeck::Rank::QUEEN, SoftCardDeck::Suit::HEARTS));
-	cardDeck.push_back(SoftCardDeck::Card(SoftCardDeck::Rank::KING, SoftCardDeck::Suit::HEARTS));
-	cardDeck.push_back(SoftCardDeck::Card(SoftCardDeck::Rank::ACE, SoftCardDeck::Suit::HEARTS));
+	std::deque<SoftCardDeck::CardModel> cardDeck, cardDeck2, cardDeck3;
+	cardDeck.push_back(SoftCardDeck::CardModel(SoftCardDeck::Rank::JACK, SoftCardDeck::Suit::HEARTS));
+	cardDeck.push_back(SoftCardDeck::CardModel(SoftCardDeck::Rank::QUEEN, SoftCardDeck::Suit::HEARTS));
+	cardDeck.push_back(SoftCardDeck::CardModel(SoftCardDeck::Rank::KING, SoftCardDeck::Suit::HEARTS));
+	cardDeck.push_back(SoftCardDeck::CardModel(SoftCardDeck::Rank::ACE, SoftCardDeck::Suit::HEARTS));
 
-	cardDeck2.push_back(SoftCardDeck::Card(SoftCardDeck::Rank::JACK, SoftCardDeck::Suit::CLUBS));
-	cardDeck2.push_back(SoftCardDeck::Card(SoftCardDeck::Rank::QUEEN, SoftCardDeck::Suit::CLUBS));
-	cardDeck2.push_back(SoftCardDeck::Card(SoftCardDeck::Rank::KING, SoftCardDeck::Suit::CLUBS));
-	cardDeck2.push_back(SoftCardDeck::Card(SoftCardDeck::Rank::ACE, SoftCardDeck::Suit::CLUBS));
+	cardDeck2.push_back(SoftCardDeck::CardModel(SoftCardDeck::Rank::JACK, SoftCardDeck::Suit::CLUBS));
+	cardDeck2.push_back(SoftCardDeck::CardModel(SoftCardDeck::Rank::QUEEN, SoftCardDeck::Suit::CLUBS));
+	cardDeck2.push_back(SoftCardDeck::CardModel(SoftCardDeck::Rank::KING, SoftCardDeck::Suit::CLUBS));
+	cardDeck2.push_back(SoftCardDeck::CardModel(SoftCardDeck::Rank::ACE, SoftCardDeck::Suit::CLUBS));
 
-	std::vector<SoftCardDeck::Deck> myDeckVector;
-	myDeckVector.push_back(SoftCardDeck::Deck(cardDeck));
-	myDeckVector.push_back(SoftCardDeck::Deck(cardDeck2));
+	cardDeck3.push_back(SoftCardDeck::CardModel(SoftCardDeck::Rank::JACK, SoftCardDeck::Suit::DIAMONDS));
+	cardDeck3.push_back(SoftCardDeck::CardModel(SoftCardDeck::Rank::QUEEN, SoftCardDeck::Suit::DIAMONDS));
+	cardDeck3.push_back(SoftCardDeck::CardModel(SoftCardDeck::Rank::KING, SoftCardDeck::Suit::DIAMONDS));
+	cardDeck3.push_back(SoftCardDeck::CardModel(SoftCardDeck::Rank::ACE, SoftCardDeck::Suit::DIAMONDS));
+
+	std::vector<SoftCardDeck::DeckModel> myDeckVector;
+	myDeckVector.push_back(SoftCardDeck::DeckModel(cardDeck));
+	myDeckVector.push_back(SoftCardDeck::DeckModel(cardDeck2));
+	myDeckVector.push_back(SoftCardDeck::DeckModel(cardDeck3));
+
+	// SoftCardDeck::BoardModel myBoard(myDeckVector[0], myDeckVector[1], myDeckVector[2]);
 	int currentDeck = 0;
 
-	std::vector<std::vector<displayCard> > cardTexturesVector;
+	std::vector<SoftCardDeck::DeckView> cardTexturesVector;
 	for(int j = 0; j < myDeckVector.size(); ++j){
-		std::vector<displayCard> cardTextures;
-		for(int i = 0; i < myDeckVector[j].size(); ++i){
-			sf::Texture texture;
-			if(!texture.loadFromFile(myDeckVector[j].current_card().path())){
-				return -1;
-			}
-			cardTextures.push_back({texture, myDeckVector[j].current_card().uuid()});
-			myDeckVector[j].next_card();
-		}
-		cardTexturesVector.push_back(cardTextures);
+		cardTexturesVector.push_back(myDeckVector[j]);
 	}
 	sf::RenderWindow window(sf::VideoMode(1000, 1000), "Playing Cards");
 	while(window.isOpen()){
@@ -67,36 +65,28 @@ int main(){
 					currentDeck = !currentDeck;
 				}
 				if(event.key.code == sf::Keyboard::Enter){
-					myDeckVector[currentDeck].move_current_card_to(myDeckVector[!currentDeck]);
-					cardTexturesVector[currentDeck].clear();
-					std::vector<displayCard> cardTextures;
-					for(int j = 0; j < myDeckVector.size(); ++j){
-						std::vector<displayCard> cardTextures;
-						for(int i = 0; i < myDeckVector[j].size(); ++i){
-							sf::Texture texture;
-							if(!texture.loadFromFile(myDeckVector[j].current_card().path())){
-								return -1;
-							}
-							cardTextures.push_back({texture, myDeckVector[j].current_card().uuid()});
-							myDeckVector[j].next_card();
-						}
-						cardTexturesVector[j] = cardTextures;
-					}
+					// myDeckVector[currentDeck].move_current_card_to(myDeckVector[!currentDeck]);
+					// cardTexturesVector[currentDeck].clear();
+					// std::vector<SoftCardDeck::CardView> cardTextures;
+					// for(int j = 0; j < myDeckVector.size(); ++j){
+					// 	std::vector<SoftCardDeck::CardView> cardTextures;
+					// 	for(int i = 0; i < myDeckVector[j].size(); ++i){
+					// 		sf::Texture texture;
+					// 		if(!texture.loadFromFile(myDeckVector[j].current_card().path())){
+					// 			return -1;
+					// 		}
+					// 		SoftCardDeck::CardView cv = SoftCardDeck::CardView(texture, myDeckVector[j].current_card().uuid());
+					// 		cardTextures.push_back(cv);
+					// 		myDeckVector[j].next_card();
+					// 	}
+					// 	cardTexturesVector[j] = cardTextures;
+					// }
 				}
 			}
 		}
 		window.clear(sf::Color(0, 125, 0));
-		for(int j = 0; j < myDeckVector.size(); ++j){
-			for(int i = 0; i < myDeckVector[j].size(); ++i){
-				sf::Sprite sprite;
-				int selected = 0;
-				if(cardTexturesVector[j][i].id == myDeckVector[j].current_card().uuid()){
-					selected = 50;
-				}
-				sprite.setTexture(cardTexturesVector[j][i].texture);
-				sprite.setPosition(375+30*i+200-j*400, 275-selected);
-				window.draw(sprite);
-			}
+		for(int j = 0; j < std::min(2, (int)cardTexturesVector.size()); ++j){
+			cardTexturesVector[j].display_deck(500-j*400, 275, &window);
 		}
 		window.display();
 	}
