@@ -10,7 +10,10 @@ add_executable(${PROJECT_NAME} "src/main.cpp"
 	"src/constants/Card_Constants.cpp"
 	"src/models/Card/Card.cpp"
 	"src/models/Deck/Deck.cpp"
+	"src/models/Board/Board.cpp"
 	"src/utils/UUID/UUID.cpp"
+	"src/views/Card/Card.cpp"
+	"src/views/Deck/Deck.cpp"
 )
 
 target_link_libraries(${PROJECT_NAME} sfml::sfml)

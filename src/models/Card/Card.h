@@ -4,7 +4,7 @@
 #include <string>
 
 namespace SoftCardDeck {
-	class Card {
+	class CardModel {
 		private:
 			SoftCardDeck::Rank __cardRank;
 			SoftCardDeck::Suit __cardSuit;
@@ -17,10 +17,10 @@ namespace SoftCardDeck {
 			SoftCardDeck::Suit suit();
 			SoftCardDeck::UUID uuid();
 			bool facedup();
-			Card(Rank, Suit);
+			CardModel(Rank, Suit);
 			std::string path();
 			void set_face_up();
 			void set_face_down();
-			bool operator==(const Card &card) const;
+			bool operator==(const CardModel &card) const;
 	};
 }
