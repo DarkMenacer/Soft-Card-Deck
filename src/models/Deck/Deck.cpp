@@ -81,3 +81,7 @@ void SoftCardDeck::DeckModel::move_current_card_to(SoftCardDeck::DeckModel &d){
 	d.add_card(this->current_card());
 	this->delete_current_card();
 }
+
+std::deque<SoftCardDeck::CardModel> SoftCardDeck::DeckModel::get_cards_copy(){
+	return std::deque<SoftCardDeck::CardModel>(this->__deckCards);
+}

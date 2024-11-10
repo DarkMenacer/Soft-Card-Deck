@@ -3,13 +3,15 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
-SoftCardDeck::CardView::CardView(const sf::Texture &texture_, const SoftCardDeck::UUID &id_) : __texture(texture_), __id(id_){}
+SoftCardDeck::CardView::CardView(SoftCardDeck::CardModel &cardModel){
+	this->__cardController = &cardModel;
+}
 
 void SoftCardDeck::CardView::display_card(float xCoordinate, float yCoordinate, sf::RenderWindow *window){
+	sf::Texture texture;
+	if(!texture.loadFromFile(this->__cardController->path())){return;}
 	sf::Sprite sprite;
-	sprite.setTexture(this->__texture);
+	sprite.setTexture(texture);
 	sprite.setPosition(xCoordinate, yCoordinate);
 	window->draw(sprite);
 }
-
-SoftCardDeck::UUID SoftCardDeck::CardView::id(){return this->__id;}

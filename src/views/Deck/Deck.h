@@ -7,7 +7,7 @@
 namespace SoftCardDeck {
 	class DeckView {
 		private:
-			std::vector<SoftCardDeck::CardView> __deckView;
+			SoftCardDeck::DeckModel *__deckController;
 		public:
 			DeckView(SoftCardDeck::DeckModel &deck_);
 			void display_deck(float xCoordinate, float yCoordinate, sf::RenderWindow *window);
