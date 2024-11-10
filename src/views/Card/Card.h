@@ -1,16 +1,15 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "../../utils/UUID/UUID.h"
+#include "../../models/Card/Card.h"
 
 namespace SoftCardDeck {
 	class CardView {
 		private:
-			sf::Texture __texture;
-			SoftCardDeck::UUID __id;
+			SoftCardDeck::CardModel *__cardController;
 		public:
-			CardView(const sf::Texture &texture_, const SoftCardDeck::UUID &id_);
+			CardView(SoftCardDeck::CardModel &cardModel);
 			void display_card(float xCoordinate, float yCoordinate, sf::RenderWindow *window);
-			SoftCardDeck::UUID id();
 
 			// TODO: Add Card animations for inserting and deleting
 	};
