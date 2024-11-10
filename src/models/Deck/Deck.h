@@ -26,6 +26,7 @@ namespace SoftCardDeck {
 			void sort();
 			int size();
 			void move_current_card_to(DeckModel &d);
+			std::deque<SoftCardDeck::CardModel> get_cards_copy();
 	};
 
 }
