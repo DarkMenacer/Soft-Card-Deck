@@ -3,8 +3,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
-SoftCardDeck::CardView::CardView(SoftCardDeck::CardModel &cardModel)
-{
+SoftCardDeck::CardView::CardView(SoftCardDeck::CardModel &cardModel){
 	this->__cardController = &cardModel;
 }
 
