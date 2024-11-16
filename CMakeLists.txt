@@ -14,6 +14,7 @@ add_executable(${PROJECT_NAME} "src/main.cpp"
 	"src/utils/UUID/UUID.cpp"
 	"src/views/Card/Card.cpp"
 	"src/views/Deck/Deck.cpp"
+	"src/views/Board/Board.cpp"
 )
 
 target_link_libraries(${PROJECT_NAME} sfml::sfml)

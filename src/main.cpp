@@ -6,6 +6,7 @@
 #include "utils/UUID/UUID.h"
 #include "views/Card/Card.h"
 #include "views/Deck/Deck.h"
+#include "views/Board/Board.h"
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Window/Event.hpp>
@@ -13,6 +14,7 @@
 #include <algorithm>
 #include <deque>
 #include <iostream>
+#include <iterator>
 #include <ostream>
 #include <string>
 #include <vector>
@@ -39,13 +41,10 @@ int main(){
 	deckModels.push_back(SoftCardDeck::DeckModel(cardDeck2));
 	deckModels.push_back(SoftCardDeck::DeckModel(cardDeck3));
 
-	// SoftCardDeck::BoardModel myBoard(deckModels[0], deckModels[1], deckModels[2]);
-	int currentDeck = 0;
+	SoftCardDeck::BoardModel myBoard(&deckModels[0], &deckModels[1], &deckModels[2]);
 
-	std::vector<SoftCardDeck::DeckView> deckViews;
-	for(int j = 0; j < deckModels.size(); ++j){
-		deckViews.push_back(deckModels[j]);
-	}
+	SoftCardDeck::BoardView boardView = myBoard;
+
 	sf::RenderWindow window(sf::VideoMode(1000, 1000), "Playing Cards");
 	while(window.isOpen()){
 		window.clear();
@@ -56,26 +55,18 @@ int main(){
 			}
 			if(event.type == sf::Event::KeyPressed){
 				if(event.key.code == sf::Keyboard::Right){
-					deckModels[currentDeck].next_card();
+					myBoard.faced_up_deck()->next_card();
 				}
 				if(event.key.code == sf::Keyboard::Left){
-					deckModels[currentDeck].previous_card();
+					myBoard.faced_up_deck()->previous_card();
 				}
-				if(event.key.code == sf::Keyboard::C){
-					currentDeck = !currentDeck;
-				}
-				if(event.key.code == sf::Keyboard::Enter){
-					deckModels[currentDeck].move_current_card_to(deckModels[!currentDeck]);
-					for(int j = 0; j < std::min(2, (int)deckViews.size()); ++j){
-						deckViews[j].display_deck(500-j*400, 275, &window);
-					}
-				}
+				if(event.key.code == sf::Keyboard::C){}
+				if(event.key.code == sf::Keyboard::F){}
+				if(event.key.code == sf::Keyboard::Enter){}
 			}
 		}
 		window.clear(sf::Color(0, 125, 0));
-		for(int j = 0; j < std::min(2, (int)deckViews.size()); ++j){
-			deckViews[j].display_deck(500-j*400, 275, &window);
-		}
+		boardView.display_board(250, 250, &window);
 		window.display();
 	}
 	return 0;

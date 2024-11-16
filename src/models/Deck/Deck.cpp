@@ -2,6 +2,7 @@
 #include "../Card/Card.h"
 #include <algorithm>
 #include <deque>
+#include <iterator>
 #include <memory>
 #include <random>
 
@@ -17,7 +18,7 @@ SoftCardDeck::CardModel SoftCardDeck::DeckModel::bottom_card(){
 	return this->__deckCards[0];
 }
 
-SoftCardDeck::CardModel SoftCardDeck::DeckModel::current_card(){
+SoftCardDeck::CardModel &SoftCardDeck::DeckModel::current_card(){
 	return *this->__currentCard;
 }
 
@@ -82,6 +83,6 @@ void SoftCardDeck::DeckModel::move_current_card_to(SoftCardDeck::DeckModel &d){
 	this->delete_current_card();
 }
 
-std::deque<SoftCardDeck::CardModel> SoftCardDeck::DeckModel::get_cards_copy(){
-	return std::deque<SoftCardDeck::CardModel>(this->__deckCards);
+std::deque<SoftCardDeck::CardModel> *SoftCardDeck::DeckModel::deckCards(){
+	return &this->__deckCards;
 }
