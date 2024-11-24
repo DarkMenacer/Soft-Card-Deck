@@ -26,14 +26,15 @@ The purpose of this software is to make a deck of playing cards always accessibl
 	make
 	./SoftCardDeck
 
-##### Windows *untested
-
+##### Windows/Linux
+	- currently untested
 
 ---
 
 ### Game Docs
 
-You can refer to the Wiki of this repository for the guide of user inputs to trigger supported actions, particularly [this](https://github.com/DarkMenacer/Soft-Card-Deck/wiki/Available-Actions-and-Corresponding-Keys) page.
+You can refer to the Wiki of this repository for the guide
+	- [User inputs to trigger supported actions](https://github.com/DarkMenacer/Soft-Card-Deck/wiki/Available-Actions-and-Corresponding-Keys).
 
 ---
 
