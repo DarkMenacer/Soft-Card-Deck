@@ -11,5 +11,5 @@ void SoftCardDeck::BoardView::display_board(float xCoordinate, float yCoordinate
 	facedDownDeckView.display_deck_compact(xCoordinate, yCoordinate, window);
 
 	SoftCardDeck::DeckView facedUpDeckView = *this->__boardController->faced_up_deck();
-	facedUpDeckView.display_deck_fan(xCoordinate + 75 * this->__boardController->faced_up_deck()->size(), yCoordinate, window);
+	facedUpDeckView.display_deck_fan(xCoordinate+250, yCoordinate, window);
 }
