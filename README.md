@@ -20,11 +20,11 @@ The purpose of this software is to make a deck of playing cards always accessibl
 ### To Build:
 
 ##### MacOS
-	conan install . --output-folder=build --build=missing
-	cd build
-	cmake -S .. -B . -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_EXPORT_COMPILE_COMMANDS=1
-	make
-	./SoftCardDeck
+	$ conan install . --output-folder=build --build=missing
+	$ cd build
+	$ cmake -S .. -B . -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+	$ make
+	$ ./SoftCardDeck
 
 ##### Windows/Linux
 	- currently untested
@@ -41,6 +41,6 @@ You can refer to the Wiki of this repository for the guide
 ### Logs
 
     Created: 27 October 2024
-    Last Edit: 24 November 2024
+    Last Edit: 25 November 2024
 
 ---
