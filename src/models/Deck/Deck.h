@@ -19,12 +19,13 @@ namespace SoftCardDeck {
 			void next_card();
 			void previous_card();
 			void flip_current_card();
-			void face_up_deck();
-			void face_down_deck();
 			void shuffle();
 			void sort();
 			int size();
 			void move_current_card_to(DeckModel &d);
 			std::deque<SoftCardDeck::CardModel> *deckCards();
+			void face_up_deck();
+			void face_down_deck();
+			void flip_deck();
 	};
 }

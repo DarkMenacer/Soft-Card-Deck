@@ -86,3 +86,12 @@ void SoftCardDeck::DeckModel::move_current_card_to(SoftCardDeck::DeckModel &d){
 std::deque<SoftCardDeck::CardModel> *SoftCardDeck::DeckModel::deckCards(){
 	return &this->__deckCards;
 }
+
+void SoftCardDeck::DeckModel::flip_deck(){
+	if(this->__currentCard->facedup()){
+		this->face_down_deck();
+	}
+	else{
+		this->face_up_deck();
+	}
+}
